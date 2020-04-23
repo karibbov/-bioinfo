@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+<body>
+<div>
+  Pattern: <input type="text" id="pattern" value="ACCTAGGAC">
+  Length: <input type="number" id="length" value="9">
+  Distance: <input type="number" id="distance" value="1">
+</div>
+
+
+<div>
+  <label for="func">Choose a function:</label>
+
+  <select id="func">
+    <option value="pattern">find pattern</option>
+    <option value="frequent">find frequent pattern</option>
+    <option value="inverse">inverse complement pattern</option>
+    <option value="neighbour_test">Hamming neighbours</option>
+  </select>
+</div>
+
+ <!-- <input type="text" id="Genome" > -->
+<div class="input-group input-group-lg">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-lg">Genome String:</span>
+  </div>
+  <input id="Genome" value="ACCTAGGACCTAGGACACACCACCTAGGACTAGGAC" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+</div>
+
+</div>
+  <textarea class="form-control" aria-label="With textarea" id="output">Click the button to change the value of the text field.</textarea>
+</div>
+
+<button onclick="myFunction()">Try it</button>
+
+<script src="script.js"></script>
+
+</body>
+</html>

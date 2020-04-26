@@ -1,0 +1,78 @@
+body {
+    background: rgb(40, 40, 40);
+    color: white;
+    font-family: "Roboto", sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 17px;
+    input,
+    select {
+        padding: 5px 10px;
+    }
+    div {
+        justify-content: space-evenly;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        .smallInput {
+            width: 45%;
+            margin: 20px;
+            padding: 5px;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+            .warning {
+                color: rgb(187, 44, 44);
+                padding: 10px 0;
+                font-weight: 700;
+            }
+        }
+    }
+    .genomeDiv {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        textarea {
+            padding: 10px;
+            text-transform: uppercase;
+        }
+    }
+    .buttonDiv {
+        width: 100%;
+        button {
+            margin: 20px 0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+        }
+    }
+}
+
+.outputDiv {
+    padding: 5px 10px;
+    #output {
+        width: 100%;
+        overflow-wrap: break-word;
+    }
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

@@ -1,18 +1,18 @@
 function myFunction() {
- 
- var input;
-  input = document.getElementById("Genome").value;
-  n = document.getElementById("length").value;
-  pattern = document.getElementById("pattern").value;
-  distance = document.getElementById("distance").value;
-  func = document.getElementById("func").value;
-  
-  // output = inverseCompliment(input);
-  // out = findPattern(pattern, input)
-  // count = out.length
-  // document.getElementById("output").innerHTML = 'Inverse Compliment: ' + out + ' count of pattern ' + count;
-  output = functionHandler(input, pattern, n, distance, func);
-  document.getElementById("output").innerHTML = 'Output: ' + output;
+
+	var input;
+	input = document.getElementById("Genome").value;
+	n = document.getElementById("length").value;
+	pattern = document.getElementById("pattern").value;
+	distance = document.getElementById("distance").value;
+	func = document.getElementById("func").value;
+
+	// output = inverseCompliment(input);
+	// out = findPattern(pattern, input)
+	// count = out.length
+	// document.getElementById("output").innerHTML = 'Inverse Compliment: ' + out + ' count of pattern ' + count;
+	output = functionHandler(input, pattern, n, distance, func);
+	document.getElementById("output").innerHTML = 'Output: ' + output;
 }
 
 function functionHandler(sequence, pattern, n, distance, func) {
@@ -28,7 +28,7 @@ function functionHandler(sequence, pattern, n, distance, func) {
 		dict = findFrequentPattern(+n, sequence);
 		a = 0;
 		for (var key in dict) {
-			a = ((key>a) ? key : a);
+			a = ((key > a) ? key : a);
 		}
 		return dict[a];
 	}
@@ -45,8 +45,8 @@ function inverseCompliment(pattern) {
 	var i;
 	var text = '';
 	var a;
-	for (i=pattern.length-1; i>=0; i--){
-		switch (pattern[i]){
+	for (i = pattern.length - 1; i >= 0; i--) {
+		switch (pattern[i]) {
 			case 'G':
 			case 'g':
 				a = 'C';
@@ -73,10 +73,10 @@ function inverseCompliment(pattern) {
 	return text;
 }
 
-function findPattern(pattern, sequence){
+function findPattern(pattern, sequence) {
 	var i = 0;
 	var indices = [];
-	while (i <= sequence.length - pattern.length){
+	while (i <= sequence.length - pattern.length) {
 		index = sequence.indexOf(pattern, i)
 		// indices.push(index)
 		if (index != -1) {
@@ -84,7 +84,8 @@ function findPattern(pattern, sequence){
 			i = index + 1;
 		}
 		if (index == -1) {
-			i++;}
+			i++;
+		}
 	}
 	return indices
 }
@@ -97,8 +98,8 @@ function findFrequentPattern(n, sequence) {
 	var pattern_dict = {};
 	console.log(sequence.length - n);
 	while (i <= sequence.length - n) {
-		
-		pattern = sequence.slice(i, i+n);
+
+		pattern = sequence.slice(i, i + n);
 
 		// console.log(pattern, i, i+n);
 		i++;
@@ -106,7 +107,7 @@ function findFrequentPattern(n, sequence) {
 		indices = findPattern(pattern, sequence);
 		inverseIndices = findPattern(inverseCompliment(pattern), sequence);
 		count = indices.length + inverseIndices.length;
-		
+
 		if (!(count in pattern_dict)) {
 			// console.log(pattern)
 			pattern_dict[count] = [];
@@ -116,12 +117,12 @@ function findFrequentPattern(n, sequence) {
 			pattern_dict[count].push(pattern);
 			patterns.push(pattern);
 		}
-		
+
 	}
 	return pattern_dict;
 }
 
-function HammingDistance(sequenceA,sequenceB) {
+function HammingDistance(sequenceA, sequenceB) {
 	var distance = 0;
 	for (var i = 0; i < sequenceA.length; i++) {
 		if (sequenceA.charAt(i) != sequenceB.charAt(i)) {
@@ -133,7 +134,7 @@ function HammingDistance(sequenceA,sequenceB) {
 
 function NeighbourGenerator(sequence, maxDistance) {
 	neighbourList = [sequence];
-	for (var j = 1; j <= maxDistance; j++){
+	for (var j = 1; j <= maxDistance; j++) {
 		// neighbourList = neighbourList.concat(generate_first_neighbours(sequence));
 		// if (maxDistance > j )
 		list = [];
@@ -151,10 +152,10 @@ function generate_first_neighbours(sequence) {
 	firstNeighbourList = [];
 	firstNeighbourSet = new Set();
 	vocabL = ['A', 'G', 'C', 'T'];
-	
+
 	for (var index = 0; index < sequence.length; index++) {
 		let vocab = removeElement(vocabL, sequence[index])
-		for (var i = 0; i < vocab.length; i++){
+		for (var i = 0; i < vocab.length; i++) {
 			neighbour = sequence.replaceAt(index, vocab[i]);
 			console.log(sequence, neighbour, vocab[i], index, i, vocabL);
 			firstNeighbourSet.add(neighbour);
@@ -172,6 +173,6 @@ function removeElement(array, element) {
 	return array
 }
 
-String.prototype.replaceAt = function(index, replacement) {
-    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+String.prototype.replaceAt = function (index, replacement) {
+	return this.substr(0, index) + replacement + this.substr(index + replacement.length);
 }

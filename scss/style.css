@@ -1,0 +1,107 @@
+body {
+  background: #282828;
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  font-size: 17px;
+}
+
+.container input,
+.container select {
+  padding: 5px 10px;
+}
+
+.container div {
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.container div .smallInput {
+  width: 45%;
+  margin: 20px;
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container div .smallInput .warning {
+  color: #bb2c2c;
+  padding: 10px 0;
+  font-weight: 700;
+}
+
+.container .genomeDiv {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .genomeDiv textarea {
+  padding: 10px;
+  text-transform: uppercase;
+}
+
+.container .buttonDiv {
+  width: 100%;
+}
+
+.container .buttonDiv button {
+  margin: 20px 0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+}
+
+.outputDiv {
+  padding: 5px 10px;
+}
+
+.outputDiv #output {
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/*# sourceMappingURL=style.css.map */

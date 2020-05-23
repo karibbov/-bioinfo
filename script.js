@@ -39,6 +39,15 @@ function functionHandler(sequence, pattern, n, distance, func) {
 		console.log(a);
 		return output;
 	}
+
+	if (func == "frequentWHamming") {
+		dict = frequentKmerWtHamming(sequence, +distance, +n)
+		a = 0;
+		for (var key in dict) {
+			a = ((key > a) ? key : a);
+		}
+		return dict[a];
+	}
 }
 
 function inverseCompliment(pattern) {
@@ -133,17 +142,18 @@ function HammingDistance(sequenceA, sequenceB) {
 }
 
 function NeighbourGenerator(sequence, maxDistance) {
-	neighbourList = [sequence];
+	var neighbourList = [];
+	neighbourList.push(sequence);
 	for (var j = 1; j <= maxDistance; j++) {
 		// neighbourList = neighbourList.concat(generate_first_neighbours(sequence));
 		// if (maxDistance > j )
-		list = [];
+		var list = [];
 		for (var i = 0; i < neighbourList.length; i++) {
 			list.push(...generate_first_neighbours(neighbourList[i]));
 		}
-		// console.log(list)
 		neighbourList = neighbourList.concat([...new Set(list)]);
 		// d = neighbourList.forEach(generate_first_neighbours);
+		// console.log(neighbourList);
 	}
 	return [...new Set(neighbourList)];
 }
@@ -154,17 +164,17 @@ function generate_first_neighbours(sequence) {
 	vocabL = ['A', 'G', 'C', 'T'];
 
 	for (var index = 0; index < sequence.length; index++) {
-		let vocab = removeElement(vocabL, sequence[index])
+		let vocab = removeElement(vocabL, sequence[index]);
 		for (var i = 0; i < vocab.length; i++) {
 			neighbour = sequence.replaceAt(index, vocab[i]);
-			console.log(sequence, neighbour, vocab[i], index, i, vocabL);
+			// console.log(sequence, neighbour, vocab[i], index, i, vocabL);
 			firstNeighbourSet.add(neighbour);
 		}
-		vocabL.push(sequence[index])
+		vocabL.push(sequence[index]);
 
 	}
 	// console.log(firstNeighbourSet);
-	return [...firstNeighbourSet]
+	return [...firstNeighbourSet];
 }
 
 function removeElement(array, element) {
@@ -175,4 +185,67 @@ function removeElement(array, element) {
 
 String.prototype.replaceAt = function (index, replacement) {
 	return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+}
+
+
+function findPatternWithHamming(pattern, sequence, d) {
+	var i = 0;
+	var indices = [];
+	var neighbour_list = [];
+	console.log(pattern, sequence);
+	while (i <= sequence.length - pattern.length) {
+		candidate = sequence.substr(i, i+pattern.length);
+		// neighbour_list = NeighbourGenerator(candidate, d);
+		distance = HammingDistance(candidate, pattern);
+		console.log(distance, i);
+		if (distance <= d) {
+			indices.push(candidate);
+		}
+		i++;
+	}
+	return indices
+}
+
+function generateCandidatesOnHamming(sequence, d, length){
+	var neighbour_list = [];
+	var i = 0;
+	while (i <= sequence.length - length){
+		console.log(i, sequence.length - length)
+		neighbour_list.push(...NeighbourGenerator(sequence.substr(i, i+length), d));
+		neighbour_list.push(...NeighbourGenerator(inverseCompliment(sequence.substr(i, i+length)), d));
+		i++;
+	}
+	return [...new Set(neighbour_list)]
+}
+
+function frequentKmerWtHamming(sequence, d, K) {
+	var i = 0;
+	var patterns = [];
+	var counts = [];
+	var pattern_dict = {};
+	// console.log(sequence.length - K);
+	
+	candidate_list = generateCandidatesOnHamming(sequence, d, K);
+	console.log(candidate_list.length);
+	for (var i = 0; i<=candidate_list.length; i++){
+		if (typeof candidate_list[i] !== 'undefined') {
+			pattern = candidate_list[i];
+			indices = findPatternWithHamming(pattern, sequence, d);
+			// inverseIndices = findPattern(inverseCompliment(pattern), sequence);
+			count = indices.length;
+
+			if (!(count in pattern_dict)) {
+				// console.log(pattern)
+				pattern_dict[count] = [];
+			}
+			// console.log(indices);
+			if (!(patterns.includes(pattern))) {
+				pattern_dict[count].push(pattern);
+				patterns.push(pattern);
+			}
+		}
+		
+	}
+	console.log(pattern_dict);
+	return pattern_dict;
 }
